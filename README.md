@@ -29,7 +29,11 @@ The contact integration lives in `src/services/contactAdapter.js`: swap the `fet
 
 ## Deployment
 
-It is a single-page app with client routes (`/work/:slug`). Configure the host to serve `index.html` for unknown paths, e.g. Netlify `/* /index.html 200`, Vercel `rewrites: [{ "source": "/(.*)", "destination": "/" }]`.
+It is a single-page app with client routes (`/work/:slug`), so the host must serve `index.html` for unknown paths.
+
+**Vercel** is preconfigured by `vercel.json` (Vite build → `dist/`, SPA rewrite, long-lived caching for hashed `/assets/*`, basic security headers). Import the repo in Vercel, then under _Settings → Environment Variables_ set `VITE_SITE_URL` (e.g. `https://iyracreations.com`, no trailing slash), `VITE_CONTACT_EMAIL` and, when ready, `VITE_CONTACT_ENDPOINT`. These are baked in at build time, so redeploy after changing them.
+
+Other hosts: e.g. Netlify `/* /index.html 200`.
 
 ## Content to replace before launch
 
