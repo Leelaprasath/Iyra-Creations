@@ -35,7 +35,9 @@
   height: 100%;
   object-fit: cover;
   transform: scale(1.06) translate(calc(var(--mx) * -2%), calc(var(--my) * -2%));
-  transition: transform 1.2s var(--ease-out), filter var(--dur-med);
+  transition:
+    transform 1.2s var(--ease-out),
+    filter var(--dur-med);
   filter: saturate(0.85);
 }
 

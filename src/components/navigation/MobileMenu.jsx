@@ -34,10 +34,9 @@ export function MobileMenu() {
         document.querySelector('[aria-controls="mobile-menu"]')?.focus()
       }
       if (e.key !== 'Tab') return
-      const focusables = [
-        document.querySelector('[aria-controls="mobile-menu"]'),
-        ...el.querySelectorAll('a'),
-      ].filter(Boolean)
+      const focusables = [document.querySelector('[aria-controls="mobile-menu"]'), ...el.querySelectorAll('a')].filter(
+        Boolean,
+      )
       const first = focusables[0]
       const last = focusables[focusables.length - 1]
       if (e.shiftKey && document.activeElement === first) {
@@ -61,11 +60,22 @@ export function MobileMenu() {
       const items = el.querySelectorAll('[data-menu-item]')
       if (open) {
         gsap.set(el, { visibility: 'visible' })
-        gsap.fromTo(el, { clipPath: 'inset(0 0 100% 0)' }, { clipPath: 'inset(0 0 0% 0)', duration: reduced ? 0.01 : DURATION.base, ease: EASE.inOut })
+        gsap.fromTo(
+          el,
+          { clipPath: 'inset(0 0 100% 0)' },
+          { clipPath: 'inset(0 0 0% 0)', duration: reduced ? 0.01 : DURATION.base, ease: EASE.inOut },
+        )
         gsap.fromTo(
           items,
           { yPercent: reduced ? 0 : 100, autoAlpha: 0 },
-          { yPercent: 0, autoAlpha: 1, duration: reduced ? 0.2 : DURATION.base, ease: EASE.out, stagger: STAGGER.items, delay: reduced ? 0 : 0.25 },
+          {
+            yPercent: 0,
+            autoAlpha: 1,
+            duration: reduced ? 0.2 : DURATION.base,
+            ease: EASE.out,
+            stagger: STAGGER.items,
+            delay: reduced ? 0 : 0.25,
+          },
         )
       } else {
         gsap.to(el, {
@@ -94,7 +104,13 @@ export function MobileMenu() {
         <ol className={styles.list}>
           {navigation.map((item, i) => (
             <li key={item.hash} className={styles.row}>
-              <a href={`/#${item.hash}`} className={styles.link} data-menu-item onClick={() => setOpen(false)} tabIndex={open ? 0 : -1}>
+              <a
+                href={`/#${item.hash}`}
+                className={styles.link}
+                data-menu-item
+                onClick={() => setOpen(false)}
+                tabIndex={open ? 0 : -1}
+              >
                 <span className={styles.num}>{String(i + 1).padStart(2, '0')}</span>
                 {item.label}
               </a>

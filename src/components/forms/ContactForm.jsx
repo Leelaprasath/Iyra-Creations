@@ -96,15 +96,62 @@ export function ContactForm() {
       </p>
 
       <div className={styles.row}>
-        <Field name="name" label="Name" required autoComplete="name" value={values.name} onChange={update} onBlur={blur} error={shown('name')} />
-        <Field name="email" label="Email" required type="email" autoComplete="email" inputMode="email" value={values.email} onChange={update} onBlur={blur} error={shown('email')} />
+        <Field
+          name="name"
+          label="Name"
+          required
+          autoComplete="name"
+          value={values.name}
+          onChange={update}
+          onBlur={blur}
+          error={shown('name')}
+        />
+        <Field
+          name="email"
+          label="Email"
+          required
+          type="email"
+          autoComplete="email"
+          inputMode="email"
+          value={values.email}
+          onChange={update}
+          onBlur={blur}
+          error={shown('email')}
+        />
       </div>
       <div className={styles.row}>
-        <Field name="phone" label="Phone" type="tel" autoComplete="tel" inputMode="tel" value={values.phone} onChange={update} onBlur={blur} error={shown('phone')} />
-        <Field name="company" label="Company" autoComplete="organization" value={values.company} onChange={update} onBlur={blur} error={shown('company')} />
+        <Field
+          name="phone"
+          label="Phone"
+          type="tel"
+          autoComplete="tel"
+          inputMode="tel"
+          value={values.phone}
+          onChange={update}
+          onBlur={blur}
+          error={shown('phone')}
+        />
+        <Field
+          name="company"
+          label="Company"
+          autoComplete="organization"
+          value={values.company}
+          onChange={update}
+          onBlur={blur}
+          error={shown('company')}
+        />
       </div>
       <div className={styles.row}>
-        <Field as="select" name="service" label="Service" required value={values.service} onChange={update} onBlur={blur} error={shown('service')}>
+        <Field
+          as="select"
+          name="service"
+          label="Service"
+          required
+          value={values.service}
+          onChange={update}
+          onBlur={blur}
+          error={shown('service')}
+        >
           <option value="" disabled>
             Select a service
           </option>
@@ -114,7 +161,15 @@ export function ContactForm() {
             </option>
           ))}
         </Field>
-        <Field as="select" name="budget" label="Budget" value={values.budget} onChange={update} onBlur={blur} error={shown('budget')}>
+        <Field
+          as="select"
+          name="budget"
+          label="Budget"
+          value={values.budget}
+          onChange={update}
+          onBlur={blur}
+          error={shown('budget')}
+        >
           <option value="">Select a range</option>
           {budgetOptions.map((b) => (
             <option key={b} value={b}>
@@ -144,7 +199,11 @@ export function ContactForm() {
         </Button>
         <div ref={statusRef} tabIndex={-1} className={styles.status} aria-live="polite">
           {status === 'submitting' && <p>Sending your message…</p>}
-          {status === 'error' && <p className={styles.statusError}>Something went wrong sending your message. Please try again in a moment.</p>}
+          {status === 'error' && (
+            <p className={styles.statusError}>
+              Something went wrong sending your message. Please try again in a moment.
+            </p>
+          )}
           {status === 'unconfigured' && (
             <p className={styles.statusError}>
               Online enquiries are not connected yet, so your message was not sent.{' '}

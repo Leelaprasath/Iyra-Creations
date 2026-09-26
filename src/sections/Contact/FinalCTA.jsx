@@ -17,7 +17,7 @@ export function FinalCTA() {
           Have an idea?
         </p>
         <h2 id="cta-title" className={styles.title} data-reveal="lines">
-          Let&apos;s make it <span className="accent">real.</span>
+          Let&apos;s make it real<span className="accent">.</span>
         </h2>
         <div className={styles.actions} data-reveal="fade">
           <Button href="#contact" magnetic onClick={() => track('start_project_clicked', { location: 'final-cta' })}>

@@ -8,7 +8,9 @@ describe('resolveTier', () => {
     expect(resolveTier({ webgl: null, layout: 'desktop' })).toBe('fallback')
   })
   it('uses low for software renderers', () => {
-    expect(resolveTier({ webgl: { renderer: 'Google SwiftShader' }, layout: 'desktop', cores: 16, memory: 16 })).toBe('low')
+    expect(resolveTier({ webgl: { renderer: 'Google SwiftShader' }, layout: 'desktop', cores: 16, memory: 16 })).toBe(
+      'low',
+    )
   })
   it('gives capable desktops high', () => {
     expect(resolveTier({ webgl: gpu, layout: 'desktop', cores: 12, memory: 16 })).toBe('high')

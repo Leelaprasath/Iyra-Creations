@@ -64,7 +64,9 @@
   height: 6px;
   border: 1px solid currentColor;
   transform: rotate(45deg);
-  transition: background var(--dur-fast), border-color var(--dur-fast);
+  transition:
+    background var(--dur-fast),
+    border-color var(--dur-fast);
 }
 
 .item[aria-pressed='true'] .dot {
@@ -113,7 +115,9 @@
   margin: -5px;
   background: var(--c-muted);
   transform: rotate(calc(var(--i) * 45deg)) translateX(min(18vw, 15rem)) rotate(45deg);
-  transition: background var(--dur-fast), scale var(--dur-med);
+  transition:
+    background var(--dur-fast),
+    scale var(--dur-med);
 }
 .node[data-active] {
   background: var(--c-orange);

@@ -35,7 +35,13 @@ export function Capabilities() {
   const current = capabilities[active]
 
   return (
-    <section ref={ref} id="capabilities" className={styles.section} data-scene={SCENE} aria-labelledby="capabilities-title">
+    <section
+      ref={ref}
+      id="capabilities"
+      className={styles.section}
+      data-scene={SCENE}
+      aria-labelledby="capabilities-title"
+    >
       <div className={styles.sticky}>
         <div className={`container ${styles.grid}`}>
           <div className={styles.text}>
@@ -70,7 +76,12 @@ export function Capabilities() {
             {tier === 'fallback' && (
               <div className={styles.orbit} style={{ '--warmth': current.warmth }}>
                 {capabilities.map((c, i) => (
-                  <span key={c.id} className={styles.node} data-active={i === active || undefined} style={{ '--i': i }} />
+                  <span
+                    key={c.id}
+                    className={styles.node}
+                    data-active={i === active || undefined}
+                    style={{ '--i': i }}
+                  />
                 ))}
               </div>
             )}

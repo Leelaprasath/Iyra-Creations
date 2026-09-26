@@ -31,8 +31,17 @@ export function Hero() {
         return
       }
       const tl = gsap.timeline({ delay: reduced ? 0 : 0.35 })
-      tl.to(lines, { yPercent: 0, duration: reduced ? 0.01 : DURATION.cinematic, ease: EASE.out, stagger: STAGGER.lines })
-      tl.to(rest, { autoAlpha: 1, y: 0, duration: DURATION.base, ease: EASE.soft, stagger: STAGGER.items }, reduced ? 0 : '-=1.1')
+      tl.to(lines, {
+        yPercent: 0,
+        duration: reduced ? 0.01 : DURATION.cinematic,
+        ease: EASE.out,
+        stagger: STAGGER.lines,
+      })
+      tl.to(
+        rest,
+        { autoAlpha: 1, y: 0, duration: DURATION.base, ease: EASE.soft, stagger: STAGGER.items },
+        reduced ? 0 : '-=1.1',
+      )
     },
     { scope: ref, dependencies: [play] },
   )

@@ -22,8 +22,8 @@ export function About() {
         </h2>
         <div className={styles.body}>
           <p className="lead" data-reveal="fade">
-            IYRA Creations is a creative technology studio. We work where design, engineering and storytelling meet — so a
-            brand, a product and the way it moves are conceived as one thing.
+            IYRA Creations is a creative technology studio. We work where design, engineering and storytelling meet — so
+            a brand, a product and the way it moves are conceived as one thing.
           </p>
           <ul className={styles.disciplines} aria-label="Disciplines">
             {DISCIPLINES.map((d, i) => (

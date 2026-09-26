@@ -6,9 +6,7 @@
   flex-direction: column;
   justify-content: space-between;
   padding: calc(var(--header-h) + 3rem) var(--gutter) 2.5rem;
-  background:
-    radial-gradient(60% 45% at 85% 100%, rgb(219 98 43 / 0.22), transparent 70%),
-    var(--c-black);
+  background: radial-gradient(60% 45% at 85% 100%, rgb(219 98 43 / 0.22), transparent 70%), var(--c-black);
   visibility: hidden;
   clip-path: inset(0 0 100% 0);
   pointer-events: auto;
@@ -36,7 +34,9 @@
   letter-spacing: -0.04em;
   text-transform: uppercase;
   color: var(--c-white);
-  transition: color var(--dur-fast) var(--ease-out), transform var(--dur-med) var(--ease-out);
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    transform var(--dur-med) var(--ease-out);
 }
 .link:hover,
 .link:focus-visible {

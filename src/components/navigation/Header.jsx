@@ -24,7 +24,14 @@ export function Header() {
         gsap.set(items, { autoAlpha: 0, y: -12 })
         return
       }
-      gsap.to(items, { autoAlpha: 1, y: 0, duration: DURATION.base, ease: EASE.out, stagger: STAGGER.items, delay: 0.4 })
+      gsap.to(items, {
+        autoAlpha: 1,
+        y: 0,
+        duration: DURATION.base,
+        ease: EASE.out,
+        stagger: STAGGER.items,
+        delay: 0.4,
+      })
     },
     { scope: ref, dependencies: [visible] },
   )
@@ -32,7 +39,13 @@ export function Header() {
   return (
     <header ref={ref} className={styles.header}>
       <div className={styles.inner}>
-        <TransitionLink to="/" className={styles.logo} aria-label="IYRA Creations — home" data-header-item data-cursor="link">
+        <TransitionLink
+          to="/"
+          className={styles.logo}
+          aria-label="IYRA Creations — home"
+          data-header-item
+          data-cursor="link"
+        >
           <Logo height={40} />
         </TransitionLink>
 

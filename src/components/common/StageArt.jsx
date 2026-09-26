@@ -69,7 +69,16 @@ const ART = {
         ))}
       </Layer>
       <Layer s={4}>
-        <rect x="70" y="84" width="200" height="200" fill="none" stroke={LINE} transform="translate(26 -26)" opacity="0.4" />
+        <rect
+          x="70"
+          y="84"
+          width="200"
+          height="200"
+          fill="none"
+          stroke={LINE}
+          transform="translate(26 -26)"
+          opacity="0.4"
+        />
       </Layer>
     </>
   ),

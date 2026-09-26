@@ -6,7 +6,12 @@ import { COLORS } from './palette'
  * rim (white edge fading to a faint orange inner glow). One pass, no render
  * targets, no environment map.
  */
-export function createFresnelGlassMaterial({ rim = COLORS.white, inner = COLORS.orange, power = 2.6, opacity = 0.55 } = {}) {
+export function createFresnelGlassMaterial({
+  rim = COLORS.white,
+  inner = COLORS.orange,
+  power = 2.6,
+  opacity = 0.55,
+} = {}) {
   return new THREE.ShaderMaterial({
     transparent: true,
     depthWrite: false,

@@ -73,5 +73,5 @@
 
 .gallery[data-horizontal] .slide {
   flex: none;
-  width: min(62vw, 58rem);
+  width: min(46vw, 44rem, calc((100svh - var(--header-h) - 17rem) * 1.6));
 }

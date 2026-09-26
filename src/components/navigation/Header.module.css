@@ -121,7 +121,9 @@
   width: 100%;
   height: 2px;
   background: var(--c-white);
-  transition: transform var(--dur-med) var(--ease-out), top var(--dur-med) var(--ease-out);
+  transition:
+    transform var(--dur-med) var(--ease-out),
+    top var(--dur-med) var(--ease-out);
 }
 .burger i:first-child {
   top: 0;

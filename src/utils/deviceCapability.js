@@ -10,7 +10,10 @@ export function probeWebGL() {
     if (!gl) return null
     const info = gl.getExtension('WEBGL_debug_renderer_info')
     const renderer = info ? gl.getParameter(info.UNMASKED_RENDERER_WEBGL) : ''
-    const result = { webgl2: typeof WebGL2RenderingContext !== 'undefined' && gl instanceof WebGL2RenderingContext, renderer: String(renderer) }
+    const result = {
+      webgl2: typeof WebGL2RenderingContext !== 'undefined' && gl instanceof WebGL2RenderingContext,
+      renderer: String(renderer),
+    }
     gl.getExtension('WEBGL_lose_context')?.loseContext()
     return result
   } catch {

@@ -2,7 +2,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lenis from 'lenis'
 import { SCROLL } from '../config/motion'
-import { measure, update } from './tracker'
+import { measure, tracker, update } from './tracker'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -44,6 +44,8 @@ export function startSmoothScroll({ smooth }) {
   })
   ro.observe(document.body)
   measure()
+  // QA hook: ?debug exposes the scroll state for automated browser checks.
+  if (new URLSearchParams(window.location.search).has('debug')) window.__iyra = { tracker }
 
   return () => {
     gsap.ticker.remove(tick)
@@ -62,8 +64,7 @@ export function scrollToTarget(target, { immediate = false, offset = 0 } = {}) {
     return
   }
   const el = typeof target === 'string' ? document.querySelector(target) : target
-  const top =
-    typeof target === 'number' ? target : el ? el.getBoundingClientRect().top + window.scrollY + offset : 0
+  const top = typeof target === 'number' ? target : el ? el.getBoundingClientRect().top + window.scrollY + offset : 0
   window.scrollTo({ top, behavior: immediate ? 'auto' : 'smooth' })
 }
 

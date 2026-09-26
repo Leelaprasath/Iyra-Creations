@@ -12,7 +12,16 @@ const MAGNET_STRENGTH = 0.28
  * - `to` renders a router Link, `href` an anchor, otherwise a <button>.
  * - `magnetic` is reserved for the key CTAs (fine pointers only, off for reduced motion).
  */
-export function Button({ to, href, variant = 'primary', magnetic = false, cursor = 'cta', className = '', children, ...rest }) {
+export function Button({
+  to,
+  href,
+  variant = 'primary',
+  magnetic = false,
+  cursor = 'cta',
+  className = '',
+  children,
+  ...rest
+}) {
   const ref = useRef(null)
   const reduced = useReducedMotion()
 

@@ -24,10 +24,7 @@ function useFontReadiness() {
   useEffect(() => {
     const done = () => completeLoadStep('fonts')
     const timer = setTimeout(done, FONT_TIMEOUT_MS)
-    Promise.all([
-      document.fonts.load('800 100px "Inter Variable"'),
-      document.fonts.load('400 16px "Inter Variable"'),
-    ])
+    Promise.all([document.fonts.load('800 100px "Inter Variable"'), document.fonts.load('400 16px "Inter Variable"')])
       .catch(() => {})
       .finally(() => {
         clearTimeout(timer)

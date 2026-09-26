@@ -59,8 +59,10 @@ export function NameReveal() {
         </div>
 
         <div className={styles.stage}>
-          <p className={styles.name} data-dom-letters={tier === 'fallback' || undefined}>
-            <span className="visually-hidden">Demonstration name reveal: {name}, {subtitle}.</span>
+          <p className={tier === 'fallback' ? styles.name : 'visually-hidden'}>
+            <span className="visually-hidden">
+              Demonstration name reveal: {name}, {subtitle}.
+            </span>
             <span aria-hidden="true">
               {[...name].map((ch, i) => (
                 <span key={i} className={styles.letter} style={{ '--i': i }}>

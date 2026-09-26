@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { Fragment, useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -7,7 +7,11 @@ import styles from './Philosophy.module.css'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
-const LINES = [['Design', 'should'], ['be', 'felt,'], ['not', 'just', 'seen.']]
+const LINES = [
+  ['Design', 'should'],
+  ['be', 'felt,'],
+  ['not', 'just', 'seen.'],
+]
 
 /**
  * A single typographic moment: words brighten one by one as the visitor
@@ -43,10 +47,12 @@ export function Philosophy() {
         <p className={styles.statement}>
           {LINES.map((line, i) => (
             <span key={i} className={styles.line}>
-              {line.map((w) => (
-                <span key={w} className={`${styles.word} ${w === 'felt,' ? styles.felt : ''}`}>
-                  {w}{' '}
-                </span>
+              {line.map((w, j) => (
+                // The space sits between the inline-block words; inside them it would collapse.
+                <Fragment key={w}>
+                  {j > 0 && ' '}
+                  <span className={`${styles.word} ${w === 'felt,' ? styles.felt : ''}`}>{w}</span>
+                </Fragment>
               ))}
             </span>
           ))}

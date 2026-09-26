@@ -17,7 +17,8 @@ export const projects = [
     concept: true,
     category: 'SaaS Product',
     year: '2026',
-    description: 'A calm operating dashboard for wellness studios — scheduling, members and revenue in one quiet interface.',
+    description:
+      'A calm operating dashboard for wellness studios — scheduling, members and revenue in one quiet interface.',
     thumbnail: '/images/work/solace.svg',
     heroMedia: '/images/work/solace.svg',
     technologies: ['React', 'Design system', 'Data visualisation'],

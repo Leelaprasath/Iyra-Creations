@@ -51,7 +51,13 @@ function ProjectDetail({ project }) {
       </header>
 
       <figure className={`container ${styles.hero}`} data-reveal="fade">
-        <img src={project.heroMedia} alt={`${project.title} — key visual`} width="1600" height="1000" decoding="async" />
+        <img
+          src={project.heroMedia}
+          alt={`${project.title} — key visual`}
+          width="1600"
+          height="1000"
+          decoding="async"
+        />
       </figure>
 
       <div className={`container ${styles.body}`}>

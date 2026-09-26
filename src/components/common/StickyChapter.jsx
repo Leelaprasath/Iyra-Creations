@@ -83,7 +83,12 @@ export function StickyChapter({
                 {copy}
               </p>
             )}
-            <ol className={styles.rail} data-reveal="fade" aria-label={`${eyebrow} stages`}>
+            <ol
+              className={styles.rail}
+              data-reveal="fade"
+              data-detailed={stages.some((s) => s.text) || undefined}
+              aria-label={`${eyebrow} stages`}
+            >
               {stages.map((stage, i) => (
                 <li key={stage.label ?? stage} data-stage-item className={styles.stage}>
                   <span className={styles.stageNum}>{String(i + 1).padStart(2, '0')}</span>

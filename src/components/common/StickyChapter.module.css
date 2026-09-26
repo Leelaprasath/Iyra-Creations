@@ -143,3 +143,20 @@
   }
 }
 
+/* Stages with descriptions (Process): a vertical list; the active stage expands. */
+.rail[data-detailed] {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0.55rem;
+}
+
+.rail[data-detailed] .stage {
+  display: grid;
+  grid-template-columns: 2.25rem 1fr;
+  row-gap: 0;
+}
+
+.rail[data-detailed] .stageText {
+  grid-column: 2;
+  margin-top: 0.3rem;
+}

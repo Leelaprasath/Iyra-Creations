@@ -7,7 +7,14 @@ export default function NotFoundPage() {
     <section
       data-scene="philosophy"
       className="container"
-      style={{ minHeight: '100svh', display: 'grid', alignContent: 'center', gap: '1.5rem', position: 'relative', zIndex: 1 }}
+      style={{
+        minHeight: '100svh',
+        display: 'grid',
+        alignContent: 'center',
+        gap: '1.5rem',
+        position: 'relative',
+        zIndex: 1,
+      }}
       aria-labelledby="nf-title"
     >
       <p className="label label--accent">404</p>
@@ -15,7 +22,11 @@ export default function NotFoundPage() {
         This page <br />
         was never created.
       </h1>
-      <TransitionLink to="/" className="label" style={{ color: 'var(--c-white)', minHeight: 44, display: 'inline-flex', alignItems: 'center' }}>
+      <TransitionLink
+        to="/"
+        className="label"
+        style={{ color: 'var(--c-white)', minHeight: 44, display: 'inline-flex', alignItems: 'center' }}
+      >
         ← Back to IYRA
       </TransitionLink>
     </section>

@@ -8,7 +8,16 @@ import { BlendFunction, ToneMappingMode } from 'postprocessing'
  */
 export function PostProcessing({ config, highQuality }) {
   const effects = [
-    config.bloom && <Bloom key="bloom" mipmapBlur intensity={0.85} luminanceThreshold={0.62} luminanceSmoothing={0.22} radius={0.72} />,
+    config.bloom && (
+      <Bloom
+        key="bloom"
+        mipmapBlur
+        intensity={0.85}
+        luminanceThreshold={0.74}
+        luminanceSmoothing={0.22}
+        radius={0.72}
+      />
+    ),
     <ToneMapping key="tone" mode={ToneMappingMode.NEUTRAL} />,
     // Grain after tone mapping: in HDR space it tints over-bright highlights.
     config.noise && <Noise key="noise" blendFunction={BlendFunction.OVERLAY} opacity={0.06} />,

@@ -1,7 +1,17 @@
 import styles from './ContactForm.module.css'
 
 /** Labelled form control with an associated, announced error message. */
-export function Field({ name, label, required = false, error, hint, as = 'input', children, className = '', ...props }) {
+export function Field({
+  name,
+  label,
+  required = false,
+  error,
+  hint,
+  as = 'input',
+  children,
+  className = '',
+  ...props
+}) {
   const id = `field-${name}`
   const errorId = `${id}-error`
   const hintId = hint ? `${id}-hint` : undefined

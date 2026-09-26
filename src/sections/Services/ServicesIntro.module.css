@@ -29,7 +29,9 @@
   gap: 1rem;
   padding: 1.1rem 0;
   border-bottom: 1px solid var(--c-line);
-  transition: padding var(--dur-med) var(--ease-out), color var(--dur-fast);
+  transition:
+    padding var(--dur-med) var(--ease-out),
+    color var(--dur-fast);
 }
 
 .item:hover,
@@ -52,7 +54,9 @@
 
 .arrow {
   color: var(--c-muted);
-  transition: transform var(--dur-med) var(--ease-out), color var(--dur-fast);
+  transition:
+    transform var(--dur-med) var(--ease-out),
+    color var(--dur-fast);
 }
 .item:hover .arrow,
 .item:focus-visible .arrow {

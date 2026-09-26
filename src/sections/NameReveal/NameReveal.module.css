@@ -33,12 +33,14 @@
   color: var(--c-white);
 }
 
+/* Overlay layer: sits exactly over the WebGL name (centred, lens-shifted up ~6%). */
 .stage {
+  position: absolute;
+  inset: 0;
   display: grid;
-  place-content: center;
-  justify-items: center;
-  gap: 1rem;
-  text-align: center;
+  place-items: center;
+  pointer-events: none;
+  transform: translateY(-6%);
 }
 
 /* DOM letters are the visible reveal only in the fallback tier; the WebGL tiers draw them in particles. */
@@ -49,11 +51,6 @@
   letter-spacing: 0.08em;
   margin-right: -0.08em;
   color: var(--c-white);
-  opacity: 0;
-}
-
-.name[data-dom-letters] {
-  opacity: 1;
 }
 
 .letter {
@@ -64,17 +61,17 @@
 }
 
 .subtitle {
-  margin-top: clamp(9rem, 24vw, 16rem);
+  position: absolute;
+  top: calc(50% + clamp(3.5rem, 8vw, 7.5rem));
+  left: 0;
+  right: 0;
+  text-align: center;
   font-size: clamp(0.8rem, 1.4vw, 1.05rem);
   letter-spacing: 0.6em;
   margin-right: -0.6em;
   text-transform: uppercase;
   color: var(--c-100);
   opacity: calc(var(--subtitle) * (1 - var(--outro) * 0.6));
-}
-
-.name[data-dom-letters] + .subtitle {
-  margin-top: 0;
 }
 
 .outro {
@@ -88,7 +85,7 @@
 }
 
 .statement {
-  font-size: clamp(1.75rem, 4vw, 3.75rem);
+  font-size: clamp(1.6rem, 3.4vw, 3.25rem);
   font-weight: 800;
   line-height: 0.95;
   letter-spacing: var(--track-tight);
@@ -108,7 +105,7 @@
 
 @media (max-width: 767px) {
   .subtitle {
-    margin-top: 5rem;
+    top: calc(50% + 2.5rem);
     letter-spacing: 0.4em;
     margin-right: -0.4em;
   }

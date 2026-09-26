@@ -34,7 +34,7 @@
 
 .wordmark {
   display: block;
-  width: min(100%, 58rem);
+  width: min(100%, 44rem);
   height: auto;
   margin: clamp(3rem, 8vh, 5rem) 0 2rem;
   color: var(--c-white);

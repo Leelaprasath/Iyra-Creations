@@ -5,6 +5,8 @@ export const BRAND = {
   orange: '#DB622B',
   orangeHot: '#FF8A4C',
   white: '#FFFFFF',
+  /** Off-white for interface surfaces: stays below the bloom threshold. */
+  paper: '#D6D6D6',
   ink: '#0A0A0A',
   graphite: '#181818',
   steel: '#A1A1A1',

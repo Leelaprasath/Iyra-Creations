@@ -10,7 +10,8 @@ import { ParticleText } from '../particles/ParticleText'
 import { sampleLogo } from '../particles/sampleText'
 
 /** Forms the real IYRA logo: I → Y → R → A → frame → CREATIONS. */
-const sampleIntroLogo = (opts) => sampleLogo({ ...opts, parts: LOGO_PARTS, tagline: LOGO_TAGLINE, viewBox: LOGO_VIEWBOX })
+const sampleIntroLogo = (opts) =>
+  sampleLogo({ ...opts, parts: LOGO_PARTS, tagline: LOGO_TAGLINE, viewBox: LOGO_VIEWBOX })
 /** Camera distance during the intro (see CameraController INTRO_PUSH_IN). */
 const INTRO_DISTANCE = 4.8
 const FOV_TAN = Math.tan((35 / 2) * (Math.PI / 180))
