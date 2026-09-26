@@ -114,14 +114,15 @@
   height: 10px;
   margin: -5px;
   background: var(--c-muted);
-  transform: rotate(calc(var(--i) * 45deg)) translateX(min(18vw, 15rem)) rotate(45deg);
+  transform: rotate(calc(var(--i) * 45deg)) translateX(min(18vw, 15rem)) rotate(45deg) scale(var(--node-scale, 1));
   transition:
     background var(--dur-fast),
-    scale var(--dur-med);
+    transform var(--dur-med);
 }
+/* Scale inside the transform so the node grows in place instead of leaving the orbit. */
 .node[data-active] {
+  --node-scale: 1.8;
   background: var(--c-orange);
-  scale: 1.8;
 }
 
 @media (max-width: 1023px) {
@@ -156,6 +157,6 @@
     font-size: 0.95rem;
   }
   .node {
-    transform: rotate(calc(var(--i) * 45deg)) translateX(28vw) rotate(45deg);
+    transform: rotate(calc(var(--i) * 45deg)) translateX(28vw) rotate(45deg) scale(var(--node-scale, 1));
   }
 }

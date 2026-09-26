@@ -4,6 +4,7 @@ import { capabilities } from '../../data/capabilities'
 import { useAppStore } from '../../store/useAppStore'
 import { useSceneFrame } from '../core/SceneContext'
 import { BRAND, COLORS } from '../materials/palette'
+import { Glow } from '../objects/Glow'
 import { edgesOf } from '../utils/geometry'
 import { useFitScale } from '../utils/useFitScale'
 
@@ -31,7 +32,7 @@ export default function CapabilitiesScene() {
   const root = useRef(null)
   const cores = useRef(null)
   const orbit = useRef(null)
-  const light = useRef(null)
+  const glow = useRef(null)
   const warmColor = useMemo(() => new THREE.Color(), [])
   const scale = useFitScale({ width: ORBIT * 2 + 0.6, height: ORBIT * 2, distance: 10, stackedHeight: 0.34 })
 
@@ -83,14 +84,17 @@ export default function CapabilitiesScene() {
       node.userData.on = damp(node.userData.on ?? 0, on, lambda, delta)
     })
 
+    // Warmth is carried by an unlit glow, not a scene light: adding/removing a
+    // light changes the light count and forces every lit shader to recompile.
     warmColor.lerpColors(COLORS.white, COLORS.orange, warmth)
-    light.current.color.lerp(warmColor, 1 - Math.exp(-lambda * delta))
-    light.current.intensity = damp(light.current.intensity, 6 + warmth * 10, lambda, delta)
+    const u = glow.current.material.uniforms
+    u.uColor.value.lerp(warmColor, 1 - Math.exp(-lambda * delta))
+    u.uIntensity.value = damp(u.uIntensity.value, (0.25 + warmth * 0.55) * frame.presence, lambda, delta)
   })
 
   return (
     <group ref={root}>
-      <pointLight ref={light} position={[0, 1.8, 2.4]} intensity={8} distance={9} decay={1.4} />
+      <Glow ref={glow} size={5.5} intensity={0} position={[0, 0, -1.4]} />
       <group ref={cores}>
         {geometries.map((g, i) => (
           <group key={capabilities[i].id} scale={i === 0 ? 1 : 0.0001}>
@@ -102,7 +106,7 @@ export default function CapabilitiesScene() {
                 clearcoat={1}
                 clearcoatRoughness={0.3}
                 emissive={BRAND.orange}
-                emissiveIntensity={0.08 + capabilities[i].warmth * 0.25}
+                emissiveIntensity={0.14 + capabilities[i].warmth * 0.3}
               />
             </mesh>
             <lineSegments geometry={g.edges} scale={1.004}>

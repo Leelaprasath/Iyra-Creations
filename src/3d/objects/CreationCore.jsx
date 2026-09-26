@@ -10,6 +10,7 @@ import { createFresnelGlassMaterial } from '../materials/createFresnelGlassMater
 import { BRAND } from '../materials/palette'
 import { OrbitHalo } from '../particles/OrbitHalo'
 import { edgesOf } from '../utils/geometry'
+import { useFitScale } from '../utils/useFitScale'
 
 const { damp } = THREE.MathUtils
 
@@ -26,6 +27,8 @@ export function CreationCore({ quality }) {
   const rings = useRef(null)
   const tilt = useRef({ x: 0, y: 0 })
 
+  // Rings span ~5 units; on phones the core sits in the band above the headline.
+  const fit = useFitScale({ width: 5, height: 5, distance: 9, desktopShare: 0.6, stackedHeight: 0.34 })
   const detail = Math.round(6 + quality.geometryDetail * 14)
   const energy = useMemo(() => createEnergyMaterial(), [])
   const rimGlass = useMemo(() => createFresnelGlassMaterial(), [])
@@ -45,7 +48,7 @@ export function CreationCore({ quality }) {
     energy.uniforms.uAmplitude.value = 0.1 + exit * 0.18
 
     const r = root.current
-    r.scale.setScalar(appear * (1 + exit * 0.25))
+    r.scale.setScalar(fit * appear * (1 + exit * 0.25))
 
     const t = tilt.current
     const follow = motion && frame.layout === 'desktop' && pointer.active

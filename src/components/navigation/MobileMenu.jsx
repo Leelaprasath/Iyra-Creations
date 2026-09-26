@@ -67,10 +67,11 @@ export function MobileMenu() {
         )
         gsap.fromTo(
           items,
-          { yPercent: reduced ? 0 : 100, autoAlpha: 0 },
+          // Opacity only: visibility:hidden would make the links unfocusable while they animate.
+          { yPercent: reduced ? 0 : 100, opacity: 0 },
           {
             yPercent: 0,
-            autoAlpha: 1,
+            opacity: 1,
             duration: reduced ? 0.2 : DURATION.base,
             ease: EASE.out,
             stagger: STAGGER.items,

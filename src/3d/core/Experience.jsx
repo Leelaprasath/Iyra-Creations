@@ -30,6 +30,7 @@ export default function Experience() {
   }, [completeLoadStep])
 
   const onCreated = ({ gl }) => {
+    if (window.__iyra) window.__iyra.gl = gl // ?debug QA hook (see runtime/smoothScroll.js)
     gl.toneMapping = THREE.NeutralToneMapping
     // A lost context that is not restored quickly switches the site to DOM visuals.
     let timer = 0

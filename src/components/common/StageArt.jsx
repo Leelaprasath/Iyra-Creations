@@ -1,3 +1,4 @@
+import { LOGO_PARTS, LOGO_TAGLINE, LOGO_VIEWBOX } from '../../brand/logo'
 import styles from './StageArt.module.css'
 
 /**
@@ -13,6 +14,37 @@ function Layer({ s, children }) {
   return (
     <g className={styles.layer} style={{ '--s': s }}>
       {children}
+    </g>
+  )
+}
+
+/** The IYRA logo placed at (x, y), `width` units wide (filled, outlined, with or without tagline). */
+function LogoMark({ x, y, width, fill = 'none', stroke, tagline = true }) {
+  const k = width / LOGO_VIEWBOX.width
+  return (
+    <g
+      transform={`translate(${x} ${y}) scale(${k}) translate(${-LOGO_VIEWBOX.x} ${-LOGO_VIEWBOX.y})`}
+      fill={fill}
+      stroke={stroke}
+      strokeWidth={stroke ? 1.2 / k : 0}
+    >
+      {LOGO_PARTS.map((p) => (
+        <path key={p.id} d={p.d} fillRule="evenodd" />
+      ))}
+      {tagline && (
+        <text
+          x={LOGO_TAGLINE.x}
+          y={LOGO_TAGLINE.y}
+          textAnchor="middle"
+          fontFamily={LOGO_TAGLINE.fontFamily}
+          fontSize={LOGO_TAGLINE.size}
+          letterSpacing={LOGO_TAGLINE.letterSpacing}
+          fill={fill === 'none' ? stroke : fill}
+          stroke="none"
+        >
+          {LOGO_TAGLINE.text}
+        </text>
+      )}
     </g>
   )
 }
@@ -85,27 +117,25 @@ const ART = {
   logo: (
     <>
       <Layer s={0}>
-        {Array.from({ length: 49 }, (_, i) => (
-          <circle key={i} cx={110 + (i % 7) * 30} cy={80 + Math.floor(i / 7) * 30} r="1.6" fill={LINE} />
+        {Array.from({ length: 60 }, (_, i) => (
+          <circle key={i} cx={60 + (i % 12) * 25.5} cy={105 + Math.floor(i / 12) * 34} r="1.6" fill={LINE} />
         ))}
       </Layer>
       <Layer s={1}>
-        <circle cx="200" cy="170" r="96" fill="none" stroke={LINE} />
-        <line x1="110" y1="80" x2="290" y2="260" stroke={LINE} />
-        <line x1="290" y1="80" x2="110" y2="260" stroke={LINE} />
+        {[141, 150, 196, 206].map((y) => (
+          <line key={y} x1="40" y1={y} x2="360" y2={y} stroke={O} strokeOpacity="0.6" />
+        ))}
+        <circle cx="222" cy="164" r="25" fill="none" stroke={O} strokeOpacity="0.6" />
+        <line x1="95" y1="118" x2="150" y2="205" stroke={O} strokeOpacity="0.6" />
       </Layer>
       <Layer s={2}>
-        <rect x="140" y="110" width="20" height="120" fill="none" stroke={W} />
-        <path d="M180 110h26l14 40 14-40h26l-28 72v48h-24v-48z" fill="none" stroke={W} />
+        <LogoMark x={60} y={120} width={280} stroke={W} tagline={false} />
       </Layer>
       <Layer s={3}>
-        <rect x="140" y="110" width="20" height="120" fill={W} />
-        <path d="M180 110h26l14 40 14-40h26l-28 72v48h-24v-48z" fill={O} />
+        <LogoMark x={60} y={120} width={280} fill={W} tagline={false} />
       </Layer>
       <Layer s={4}>
-        <text x="200" y="290" textAnchor="middle" fill={W} fontSize="22" fontWeight="800" letterSpacing="8">
-          IYRA
-        </text>
+        <LogoMark x={60} y={120} width={280} fill={W} />
       </Layer>
     </>
   ),
@@ -113,8 +143,7 @@ const ART = {
     <>
       <Layer s={0}>
         <rect x="60" y="70" width="110" height="110" fill="#0a0a0a" stroke={LINE} />
-        <rect x="95" y="100" width="8" height="50" fill={W} />
-        <path d="M110 100h11l6 18 6-18h11l-12 30v20h-10v-20z" fill={O} />
+        <LogoMark x={70} y={105} width={90} fill={W} />
       </Layer>
       <Layer s={1}>
         <rect x="185" y="70" width="46" height="110" fill={O} />

@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
-import { useAppStore } from '../../store/useAppStore'
+import { QUALITY } from '../../config/quality'
+import { useAppStore, useTier } from '../../store/useAppStore'
+import { compileForPipeline } from '../utils/compile'
 
 const FRAMES_BEFORE_READY = 3
 
@@ -17,21 +19,18 @@ export function ReadySignal() {
   const compiled = useRef(false)
   const frames = useRef(0)
   const done = useRef(false)
+  const offscreen = Boolean(QUALITY[useTier()]?.postprocessing)
 
   useEffect(() => {
     let cancelled = false
     const finish = () => {
       if (!cancelled) compiled.current = true
     }
-    if (gl.compileAsync) gl.compileAsync(scene, camera).then(finish, finish)
-    else {
-      gl.compile(scene, camera)
-      finish()
-    }
+    compileForPipeline(gl, scene, camera, scene, offscreen).then(finish, finish)
     return () => {
       cancelled = true
     }
-  }, [gl, scene, camera])
+  }, [gl, scene, camera, offscreen])
 
   useFrame(() => {
     if (done.current || !compiled.current) return

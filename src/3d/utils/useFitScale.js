@@ -7,7 +7,7 @@ const FOV_TAN = Math.tan((35 / 2) * (Math.PI / 180))
  * Scale that fits an object of `width` world units into a share of the
  * viewport at `distance` from the camera. Desktop objects sit beside the copy
  * (half the screen); tablet/mobile objects sit above it (full width, but
- * only ~40% of the height).
+ * only the ~30% band between the header and the copy).
  */
 export function useFitScale({
   width,
@@ -15,7 +15,7 @@ export function useFitScale({
   distance,
   desktopShare = 0.46,
   stackedShare = 0.86,
-  stackedHeight = 0.38,
+  stackedHeight = 0.3,
 }) {
   const aspect = useThree((s) => s.size.width / s.size.height)
   const layout = useAppStore((s) => s.layout)

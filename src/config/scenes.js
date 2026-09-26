@@ -6,7 +6,8 @@
  *   viewport from centre ([x, y]; +x = right, +y = up). Applied as a lens shift
  *   so perspective stays natural. Desktop places objects beside the copy;
  *   tablet/mobile chapters stack the object in the top ~40% of the screen
- *   (see StickyChapter.module.css), i.e. ~0.29 above centre.
+ *   (see StickyChapter.module.css); centred in the band between the header and
+ *   the copy, i.e. ~0.25 above centre.
  */
 export const SCENE_SPACING = 14
 
@@ -15,37 +16,38 @@ export const SCENES = [
     id: 'hero',
     camera: [0, 0, 9],
     target: [0, 0, 0],
-    frame: { desktop: [0.2, 0], tablet: [0.12, 0.08], mobile: [0, 0.2] },
+    // Phones/tablets: the core floats in the band above the eyebrow and headline.
+    frame: { desktop: [0.2, 0], tablet: [0.2, 0.28], mobile: [0, 0.32] },
   },
   {
     id: 'services',
     camera: [0, 0.4, 10],
     target: [0, 0, 0],
-    frame: { desktop: [0.3, -0.06], tablet: [0.22, -0.1], mobile: [0.2, -0.22] },
+    frame: { desktop: [0.3, -0.06], tablet: [0.22, 0.28], mobile: [0.22, 0.3] },
   },
   {
     id: 'web',
     camera: [0.6, 0.3, 8.5],
     target: [0, 0, 0],
-    frame: { desktop: [0.22, 0], tablet: [0, 0.29], mobile: [0, 0.29] },
+    frame: { desktop: [0.22, 0], tablet: [0, 0.25], mobile: [0, 0.25] },
   },
   {
     id: 'saas',
     camera: [-0.6, 0.3, 8.5],
     target: [0, 0, 0],
-    frame: { desktop: [-0.22, 0], tablet: [0, 0.29], mobile: [0, 0.29] },
+    frame: { desktop: [-0.22, 0], tablet: [0, 0.25], mobile: [0, 0.25] },
   },
   {
     id: 'logo',
     camera: [0, 0, 8],
     target: [0, 0, 0],
-    frame: { desktop: [0.22, 0], tablet: [0, 0.29], mobile: [0, 0.29] },
+    frame: { desktop: [0.22, 0], tablet: [0, 0.25], mobile: [0, 0.25] },
   },
   {
     id: 'branding',
     camera: [-0.4, 0.6, 10],
     target: [0, 0, 0],
-    frame: { desktop: [-0.2, 0], tablet: [0, 0.29], mobile: [0, 0.29] },
+    frame: { desktop: [-0.2, 0], tablet: [0, 0.25], mobile: [0, 0.25] },
   },
   {
     id: 'capabilities',
@@ -58,7 +60,7 @@ export const SCENES = [
     id: 'process',
     camera: [0.3, 0.2, 8],
     target: [0, 0, 0],
-    frame: { desktop: [0.22, 0], tablet: [0, 0.29], mobile: [0, 0.29] },
+    frame: { desktop: [0.22, 0], tablet: [0, 0.25], mobile: [0, 0.25] },
   },
   {
     id: 'about',

@@ -10,6 +10,21 @@ import fragmentShader from '../shaders/particleText.frag.glsl?raw'
 const defaultSampler = (opts) => sampleText(opts)
 
 /**
+ * One invisible vertex with the shader's attributes. Rendered until the text
+ * sample is ready so the program compiles with the scene (see SceneManager
+ * Precompile) instead of stalling the frame in which the particles appear.
+ */
+function createPlaceholder() {
+  const g = new THREE.BufferGeometry()
+  g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(3), 3))
+  // Parked beyond the far plane so it can never be seen.
+  g.setAttribute('aStart', new THREE.BufferAttribute(new Float32Array([0, 0, -1e5]), 3))
+  g.setAttribute('aRandom', new THREE.BufferAttribute(new Float32Array(4), 4))
+  g.setAttribute('aLetter', new THREE.BufferAttribute(new Float32Array([1e6]), 1))
+  return g
+}
+
+/**
  * Reusable particle typography engine (intro logo, name reveals).
  * Samples `lines` of text by default; pass `sampler` (e.g. sampleLogo bound to
  * the brand geometry) to form any other shape with the same shader.
@@ -52,7 +67,7 @@ export function ParticleText({
   }, [key, sampler, width, step, maxPoints, seed])
 
   const geometry = useMemo(() => {
-    if (!sample) return null
+    if (!sample) return createPlaceholder()
     const rand = createRandom(seed + 7)
     const { count, targets, letters } = sample
     const starts = new Float32Array(count * 3)
@@ -101,7 +116,7 @@ export function ParticleText({
     [size, color, accent],
   )
 
-  useEffect(() => () => geometry?.dispose(), [geometry])
+  useEffect(() => () => geometry.dispose(), [geometry])
   useEffect(() => () => material.dispose(), [material])
 
   useFrame((state, delta) => {
@@ -111,6 +126,5 @@ export function ParticleText({
     drive?.(u, state, delta, sample)
   })
 
-  if (!geometry) return null
   return <points geometry={geometry} material={material} frustumCulled={false} />
 }
