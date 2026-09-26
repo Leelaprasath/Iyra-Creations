@@ -1,0 +1,59 @@
+.contact {
+  position: relative;
+  z-index: var(--z-content);
+  padding-block: var(--space-section);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(3rem, 6vw, 6rem);
+  align-items: start;
+}
+
+.intro {
+  position: sticky;
+  top: calc(var(--header-h) + 2rem);
+}
+
+.title {
+  margin: 1rem 0 1.5rem;
+  font-size: clamp(2.25rem, 5vw, 5rem);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: var(--track-tight);
+  text-transform: uppercase;
+  color: var(--c-white);
+}
+
+.mail {
+  display: inline-block;
+  margin-top: 2rem;
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+  font-weight: 600;
+  color: var(--c-white);
+  border-bottom: 1px solid var(--c-orange);
+}
+
+/* A quiet surface so the form stays readable over the WebGL light. */
+.formWrap {
+  padding: clamp(1.5rem, 3vw, 2.75rem);
+  background: rgb(10 10 10 / 0.72);
+  border: 1px solid var(--c-line);
+  backdrop-filter: blur(6px);
+}
+
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .intro {
+    position: static;
+  }
+}
+
+@media (max-width: 767px) {
+  .formWrap {
+    margin-inline: calc(var(--gutter) * -0.5);
+  }
+}

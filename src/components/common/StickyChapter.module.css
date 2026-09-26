@@ -1,0 +1,145 @@
+.chapter {
+  position: relative;
+  z-index: var(--z-content);
+  height: calc(var(--length) * 100svh);
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: clip;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 3rem;
+  height: 100%;
+  padding-top: var(--header-h);
+}
+
+.chapter[data-side='right'] .text {
+  order: 2;
+}
+
+.text {
+  max-width: 36rem;
+}
+
+.eyebrow {
+  margin-bottom: 1.25rem;
+}
+
+.title {
+  font-size: clamp(2.1rem, 5.2vw, 5.75rem);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: var(--track-tight);
+  text-transform: uppercase;
+  color: var(--c-white);
+}
+
+.titleLine {
+  display: block;
+}
+
+.copy {
+  margin-top: 1.5rem;
+}
+
+.rail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.25rem;
+  margin-top: 2.25rem;
+}
+
+.stage {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.45rem;
+  font-size: var(--fs-label);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.32);
+  transition: color var(--dur-med) var(--ease-out);
+}
+
+.stage[data-done] {
+  color: var(--c-muted);
+}
+
+.stage[data-active] {
+  color: var(--c-white);
+}
+
+.stage[data-active] .stageNum {
+  color: var(--c-orange);
+}
+
+.stageNum {
+  font-variant-numeric: tabular-nums;
+  transition: color var(--dur-med);
+}
+
+/* Optional per-stage description (used by Process): only the active one shows. */
+.stageText {
+  display: none;
+  flex-basis: 100%;
+  margin-top: 0.4rem;
+  font-size: 0.95rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--c-muted);
+}
+.stage[data-active] .stageText {
+  display: block;
+}
+
+.meter {
+  display: block;
+  width: 100%;
+  max-width: 22rem;
+  height: 1px;
+  margin-top: 1.25rem;
+  background: linear-gradient(to right, var(--c-orange) calc(var(--progress) * 100%), var(--c-line) 0);
+}
+
+.visual {
+  position: relative;
+  height: min(70svh, 40rem);
+}
+
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: 42% 1fr;
+    align-items: start;
+    gap: 0;
+    padding-bottom: 1.5rem;
+  }
+  .chapter[data-side] .text {
+    order: 2;
+    align-self: end;
+  }
+  .visual {
+    order: 1;
+    height: 100%;
+  }
+  .title {
+    font-size: clamp(1.9rem, 8.4vw, 3.75rem);
+  }
+  .copy {
+    margin-top: 1rem;
+    font-size: 0.98rem;
+  }
+  .rail {
+    margin-top: 1.25rem;
+  }
+}
+

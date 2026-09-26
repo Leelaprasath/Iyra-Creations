@@ -1,0 +1,146 @@
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  padding-block: calc(var(--header-h) + 2rem) clamp(5rem, 12vh, 8rem);
+}
+
+.inner {
+  position: relative;
+  z-index: var(--z-content);
+}
+
+.eyebrow {
+  margin-bottom: clamp(1.5rem, 4vh, 2.5rem);
+}
+
+.title {
+  font-size: clamp(2.35rem, min(11vw, 12.5svh), 9.5rem);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: var(--track-tight);
+  text-transform: uppercase;
+  color: var(--c-white);
+}
+
+.mask {
+  display: block;
+  overflow: clip;
+  padding-bottom: 0.04em;
+}
+
+.line {
+  display: block;
+  will-change: transform;
+}
+
+.gap {
+  margin-top: 0.22em;
+}
+
+.accentLine {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--c-white);
+}
+.accentLine :global(.accent) {
+  -webkit-text-stroke: 0;
+  color: var(--c-orange);
+}
+
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: clamp(2rem, 5vh, 3.5rem);
+}
+
+.copy {
+  max-width: 26rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.scroll {
+  position: absolute;
+  left: 50%;
+  bottom: 1.5rem;
+  display: grid;
+  justify-items: center;
+  gap: 0.6rem;
+  transform: translateX(-50%);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+
+.scroll i {
+  position: relative;
+  width: 1px;
+  height: 2.75rem;
+  background: var(--c-line);
+  overflow: hidden;
+}
+
+.scroll i::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--c-orange);
+  transform: translateY(-100%);
+  animation: scrollCue 2.2s var(--ease-in-out) infinite;
+}
+
+@keyframes scrollCue {
+  60%,
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* Fallback tier: a CSS rendition of the creation core. */
+.fallbackCore {
+  position: absolute;
+  top: 18%;
+  right: 8%;
+  width: min(34vw, 30rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, rgb(255 180 140 / 0.9) 0 6%, var(--c-orange) 14%, rgb(219 98 43 / 0.2) 30%, transparent 44%),
+    radial-gradient(circle, transparent 58%, rgb(255 255 255 / 0.18) 58.4%, transparent 59%),
+    radial-gradient(circle, transparent 68%, rgb(219 98 43 / 0.6) 68.3%, transparent 68.8%);
+  filter: drop-shadow(0 0 60px rgb(219 98 43 / 0.35));
+}
+
+@media (max-width: 767px) {
+  .hero {
+    padding-bottom: 5.5rem;
+  }
+  .scroll {
+    display: none;
+  }
+  .accentLine {
+    -webkit-text-stroke-width: 1px;
+  }
+  .fallbackCore {
+    top: 12%;
+    right: 50%;
+    width: 70vw;
+    transform: translateX(50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll i::after {
+    animation: none;
+    transform: none;
+  }
+}

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-label="Aurelia Atelier concept: rings of warm light in darkness">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="48%" r="40%"><stop offset="0" stop-color="#DB622B" stop-opacity=".45"/><stop offset=".5" stop-color="#DB622B" stop-opacity=".08"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+    <linearGradient id="ring" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="#DB622B"/><stop offset="1" stop-color="#3a1a0c"/></linearGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="#030303"/>
+  <rect width="1600" height="1000" fill="url(#glow)"/>
+  <g transform="translate(800 480)" fill="none" stroke="url(#ring)">
+    <ellipse rx="330" ry="110" stroke-width="10" transform="rotate(-18)"/>
+    <ellipse rx="260" ry="250" stroke-width="3" stroke-opacity=".7"/>
+    <ellipse rx="330" ry="110" stroke-width="2" stroke-opacity=".5" transform="rotate(38)"/>
+  </g>
+  <circle cx="1010" cy="380" r="5" fill="#fff"/>
+  <text x="140" y="900" fill="#fff" font-family="Inter, Arial, sans-serif" font-weight="800" font-size="96" letter-spacing="-4">AURELIA</text>
+  <text x="146" y="945" fill="#a1a1a1" font-family="Inter, Arial, sans-serif" font-size="22" letter-spacing="8">ATELIER — CONCEPT</text>
+</svg>

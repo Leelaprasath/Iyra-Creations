@@ -1,0 +1,77 @@
+.work {
+  position: relative;
+  z-index: var(--z-content);
+  padding-top: var(--space-section);
+}
+
+.intro {
+  margin-bottom: clamp(3rem, 8vh, 6rem);
+}
+
+.title {
+  margin: 1rem 0 2rem;
+  font-size: var(--fs-display);
+  font-weight: 800;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--track-tight);
+  text-transform: uppercase;
+  color: var(--c-white);
+}
+
+.introFoot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1.5rem 3rem;
+  align-items: flex-end;
+}
+
+.note {
+  max-width: 22rem;
+  font-size: 0.85rem;
+  color: var(--c-muted);
+  border-left: 1px solid var(--c-orange);
+  padding-left: 1rem;
+}
+
+/* Vertical (default / mobile / tablet) */
+.gallery {
+  padding-bottom: var(--space-section);
+}
+
+.track {
+  display: grid;
+  gap: clamp(3rem, 8vh, 5rem);
+  padding-inline: var(--gutter);
+  max-width: var(--max-w);
+  margin-inline: auto;
+}
+
+/* Horizontal pinned gallery (desktop) */
+.gallery[data-horizontal] {
+  height: calc(var(--count) * 75svh + 100svh);
+  padding-bottom: 0;
+}
+
+.gallery[data-horizontal] .sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: clip;
+}
+
+.gallery[data-horizontal] .track {
+  display: flex;
+  gap: 5vw;
+  max-width: none;
+  margin: 0;
+  padding: var(--header-h) 12vw 0 var(--gutter);
+  will-change: transform;
+}
+
+.gallery[data-horizontal] .slide {
+  flex: none;
+  width: min(62vw, 58rem);
+}

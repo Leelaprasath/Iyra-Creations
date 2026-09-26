@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-label="Nocturne Audio concept: concentric circle mark with a single orange arc">
+  <rect width="1600" height="1000" fill="#060606"/>
+  <g transform="translate(800 470)" fill="none">
+    <circle r="360" stroke="#161616"/>
+    <circle r="300" stroke="#1d1d1d"/>
+    <circle r="240" stroke="#262626"/>
+    <circle r="180" stroke="#333"/>
+    <circle r="120" stroke="#eaeaea" stroke-width="2"/>
+    <circle r="60" fill="#eaeaea"/>
+    <path d="M -240 0 A 240 240 0 0 1 170 -170" stroke="#DB622B" stroke-width="6" stroke-linecap="round"/>
+    <g stroke="#1a1a1a"><line x1="-420" x2="420" y1="0" y2="0"/><line x1="0" x2="0" y1="-420" y2="420"/></g>
+  </g>
+  <text x="800" y="930" text-anchor="middle" fill="#eaeaea" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="44" letter-spacing="26">NOCTURNE</text>
+</svg>

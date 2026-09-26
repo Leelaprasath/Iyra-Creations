@@ -1,0 +1,124 @@
+.section {
+  position: relative;
+  z-index: var(--z-content);
+  height: 360svh;
+}
+
+.sticky {
+  --letters: 0;
+  --intro: 1;
+  --subtitle: 0;
+  --outro: 0;
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding-block: calc(var(--header-h) + 1rem) clamp(1.5rem, 5vh, 3rem);
+  overflow: clip;
+}
+
+.head {
+  opacity: calc(0.25 + var(--intro) * 0.75);
+}
+
+.title {
+  margin-top: 1rem;
+  max-width: 14ch;
+  font-size: clamp(2rem, 5vw, 5rem);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: var(--track-tight);
+  text-transform: uppercase;
+  color: var(--c-white);
+}
+
+.stage {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+/* DOM letters are the visible reveal only in the fallback tier; the WebGL tiers draw them in particles. */
+.name {
+  font-size: clamp(3.5rem, 16vw, 14rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  margin-right: -0.08em;
+  color: var(--c-white);
+  opacity: 0;
+}
+
+.name[data-dom-letters] {
+  opacity: 1;
+}
+
+.letter {
+  display: inline-block;
+  opacity: clamp(0, calc(var(--letters) - var(--i)), 1);
+  filter: blur(calc((1 - clamp(0, calc(var(--letters) - var(--i)), 1)) * 12px));
+  text-shadow: 0 0 40px rgb(219 98 43 / 0.6);
+}
+
+.subtitle {
+  margin-top: clamp(9rem, 24vw, 16rem);
+  font-size: clamp(0.8rem, 1.4vw, 1.05rem);
+  letter-spacing: 0.6em;
+  margin-right: -0.6em;
+  text-transform: uppercase;
+  color: var(--c-100);
+  opacity: calc(var(--subtitle) * (1 - var(--outro) * 0.6));
+}
+
+.name[data-dom-letters] + .subtitle {
+  margin-top: 0;
+}
+
+.outro {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.5rem 3rem;
+  opacity: var(--outro);
+  transform: translateY(calc((1 - var(--outro)) * 1.5rem));
+}
+
+.statement {
+  font-size: clamp(1.75rem, 4vw, 3.75rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: var(--track-tight);
+  text-transform: uppercase;
+  color: var(--c-white);
+}
+
+.outroSide {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 24rem;
+}
+
+.copy {
+  color: var(--c-muted);
+}
+
+@media (max-width: 767px) {
+  .subtitle {
+    margin-top: 5rem;
+    letter-spacing: 0.4em;
+    margin-right: -0.4em;
+  }
+  .outroSide .copy {
+    font-size: 0.9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .outro {
+    transform: none;
+  }
+}

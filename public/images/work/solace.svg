@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-label="Solace OS concept: a calm dark dashboard with a single orange trend line">
+  <defs>
+    <radialGradient id="g" cx="70%" cy="30%" r="70%"><stop offset="0" stop-color="#1c1c1c"/><stop offset="1" stop-color="#050505"/></radialGradient>
+    <linearGradient id="l" x1="0" x2="1"><stop offset="0" stop-color="#DB622B" stop-opacity="0"/><stop offset=".4" stop-color="#DB622B"/><stop offset="1" stop-color="#ffb58f"/></linearGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#g)"/>
+  <g transform="translate(200 150) rotate(-4 600 350)">
+    <rect width="1200" height="700" rx="6" fill="#0d0d0d" stroke="#2a2a2a"/>
+    <rect width="220" height="700" fill="#111" />
+    <g fill="#2a2a2a"><rect x="36" y="48" width="90" height="14"/><rect x="36" y="120" width="140" height="10"/><rect x="36" y="160" width="110" height="10"/><rect x="36" y="200" width="130" height="10"/><rect x="36" y="240" width="96" height="10"/></g>
+    <rect x="36" y="118" width="4" height="14" fill="#DB622B"/>
+    <text x="280" y="140" fill="#a1a1a1" font-family="Inter, Arial, sans-serif" font-size="22" letter-spacing="4">MEMBERS THIS MONTH</text>
+    <text x="276" y="250" fill="#fff" font-family="Inter, Arial, sans-serif" font-weight="800" font-size="110" letter-spacing="-5">Calm.</text>
+    <g stroke="#1f1f1f"><line x1="280" x2="1140" y1="360" y2="360"/><line x1="280" x2="1140" y1="440" y2="440"/><line x1="280" x2="1140" y1="520" y2="520"/><line x1="280" x2="1140" y1="600" y2="600"/></g>
+    <path d="M280 580 C 380 560, 430 470, 540 500 S 700 420, 800 440 S 960 330, 1140 350" fill="none" stroke="url(#l)" stroke-width="5"/>
+    <circle cx="1140" cy="350" r="9" fill="#DB622B"/>
+    <circle cx="1140" cy="350" r="26" fill="none" stroke="#DB622B" stroke-opacity=".35"/>
+  </g>
+</svg>

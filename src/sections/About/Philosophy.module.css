@@ -1,0 +1,31 @@
+.philosophy {
+  position: relative;
+  z-index: var(--z-content);
+  min-height: 110svh;
+  display: flex;
+  align-items: center;
+  padding-block: var(--space-section);
+}
+
+.statement {
+  font-size: clamp(2.6rem, 10vw, 10.5rem);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: var(--track-tight);
+  text-transform: uppercase;
+  color: var(--c-white);
+  text-align: center;
+}
+
+.line {
+  display: block;
+}
+
+.word {
+  display: inline-block;
+  will-change: opacity, transform;
+}
+
+.felt {
+  color: var(--c-orange);
+}
