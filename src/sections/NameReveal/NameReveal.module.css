@@ -18,8 +18,10 @@
   overflow: clip;
 }
 
-.head {
-  opacity: calc(0.25 + var(--intro) * 0.75);
+/* Recedes during the reveal but never below AA contrast (0.6 white ≈ 7:1).
+   On a wrapper so the heading's own reveal animation never fights it. */
+.titleWrap {
+  opacity: calc(0.6 + var(--intro) * 0.4);
 }
 
 .title {

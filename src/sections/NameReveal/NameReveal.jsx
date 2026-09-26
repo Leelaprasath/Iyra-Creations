@@ -53,9 +53,11 @@ export function NameReveal() {
           <p className="label" data-reveal="fade">
             <span className="accent">{service.index}</span> — {service.name}
           </p>
-          <h2 id="name-reveal-title" className={styles.title} data-reveal="lines">
-            {service.title.join(' ')}
-          </h2>
+          <div className={styles.titleWrap}>
+            <h2 id="name-reveal-title" className={styles.title} data-reveal="lines">
+              {service.title.join(' ')}
+            </h2>
+          </div>
         </div>
 
         <div className={styles.stage}>

@@ -10,7 +10,7 @@ function siteUrlPlugin(siteUrl, routes) {
   return {
     name: 'iyra-site-url',
     transformIndexHtml(html) {
-      if (!base) return html
+      if (!base) return html.replace('<!--canonical-->', '').replace('<!--og:url-->', '')
       return html
         .replace('<!--canonical-->', `<link rel="canonical" href="${base}/" />`)
         .replace('<!--og:url-->', `<meta property="og:url" content="${base}/" />`)
@@ -18,9 +18,7 @@ function siteUrlPlugin(siteUrl, routes) {
     },
     generateBundle() {
       if (!base) return
-      const urls = routes
-        .map((r) => `  <url><loc>${base}${r}</loc></url>`)
-        .join('\n')
+      const urls = routes.map((r) => `  <url><loc>${base}${r}</loc></url>`).join('\n')
       this.emitFile({
         type: 'asset',
         fileName: 'sitemap.xml',

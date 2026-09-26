@@ -19,3 +19,8 @@ Priority: usability > performance > content > visuals > extra effects.
 - Particles: one Points draw call per system, animation in the vertex shader.
 - Hidden scenes are `visible = false`; scenes are code-split and loaded ahead of need.
 - Profile before removing features: DPR → particles → draw calls → postprocessing → shader cost.
+
+## Measured (headless Chrome, this build)
+- Medium tier first frame ≈ 1 s after the WebGL chunk; high ≈ 2 s (PMREM environment + transmission).
+- Journey scroll: median 120 fps, p10 ≈ 119 fps, no long tasks > 150 ms after precompile + light fix.
+- GPU resources are bounded (~180 geometries, ~25 programs) and do not grow on repeat traversal.
