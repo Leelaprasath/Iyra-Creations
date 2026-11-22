@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Field } from '../components/forms/Field'
 import { Button } from '../components/ui/Button'
-import { Logo } from '../components/ui/Logo'
+import { BrandLogo } from '../components/ui/BrandLogo'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import styles from './AdminPage.module.css'
 
@@ -90,7 +90,7 @@ function LoginForm({ onSignedIn, notice = '' }) {
   return (
     <div className={styles.loginWrap}>
       <form className={styles.login} onSubmit={submit} noValidate aria-labelledby="admin-login-title">
-        <Logo height={36} />
+        <BrandLogo height={36} />
         <h1 id="admin-login-title" className={styles.loginTitle}>
           Admin sign in<span className="accent">.</span>
         </h1>
@@ -186,7 +186,7 @@ function Dashboard({ email, rows, loadedAt, loading, error, onRefresh, onSignOut
     <div className={styles.dash}>
       <header className={styles.top}>
         <div className={styles.brand}>
-          <Logo height={28} />
+          <BrandLogo height={28} />
           <span className="label">Enquiries</span>
         </div>
         <div className={styles.account}>

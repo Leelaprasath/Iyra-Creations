@@ -98,10 +98,76 @@ export function sampleText({ lines, width = 4, step = 3, maxPoints = 6000, lineG
 
 const LOGO_PX_PER_UNIT = 2.4
 
+const imageCache = new Map()
+function loadImage(src) {
+  if (!imageCache.has(src)) {
+    imageCache.set(
+      src,
+      new Promise((resolve, reject) => {
+        const img = new Image()
+        img.decoding = 'async'
+        img.onload = () => resolve(img)
+        img.onerror = () => {
+          imageCache.delete(src)
+          reject(new Error(`Could not load ${src}`))
+        }
+        img.src = src
+      }),
+    )
+  }
+  return imageCache.get(src)
+}
+
 /**
- * Samples the IYRA logo (src/brand/logo.js) into particle targets. Each part's
- * `order` becomes the particle's glyph index, so a reveal can form I → Y → R →
- * A → frame → CREATIONS in sequence. Same return shape as sampleText.
+ * Samples a logo *image* (opaque pixels) into particle targets. `group(x, y)`
+ * (image-pixel coords) assigns each particle its reveal index, like a part's
+ * `order` in sampleLogo. Async: resolves once the image has loaded. Same
+ * return shape as sampleText.
+ */
+export async function sampleImageLogo({ image, group, groups, width = 4, step = 3, maxPoints = 6000, seed = 3 }) {
+  const img = await loadImage(image.src)
+  const k = LOGO_PX_PER_UNIT
+  const canvas = document.createElement('canvas')
+  canvas.width = Math.ceil(image.width * k)
+  canvas.height = Math.ceil(image.height * k)
+  const ctx = canvas.getContext('2d', { willReadFrequently: true })
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+  const { data } = ctx.getImageData(0, 0, canvas.width, canvas.height)
+
+  const found = []
+  for (let py = 0; py < canvas.height; py += step) {
+    for (let px = 0; px < canvas.width; px += step) {
+      if (data[(py * canvas.width + px) * 4 + 3] >= 128) found.push(px, py, group(px / k, py / k))
+    }
+  }
+
+  let indices = Array.from({ length: found.length / 3 }, (_, i) => i)
+  if (indices.length > maxPoints) {
+    const rand = createRandom(seed)
+    for (let i = indices.length - 1; i > 0; i--) {
+      const j = Math.floor(rand() * (i + 1))
+      ;[indices[i], indices[j]] = [indices[j], indices[i]]
+    }
+    indices = indices.slice(0, maxPoints)
+  }
+
+  const scale = width / canvas.width
+  const count = indices.length
+  const targets = new Float32Array(count * 3)
+  const letters = new Float32Array(count)
+  indices.forEach((src, i) => {
+    targets[i * 3] = (found[src * 3] - canvas.width / 2) * scale
+    targets[i * 3 + 1] = -(found[src * 3 + 1] - canvas.height / 2) * scale
+    letters[i] = found[src * 3 + 2]
+  })
+  return { targets, letters, count, letterCount: groups, width, height: canvas.height * scale }
+}
+
+/**
+ * Samples vector logo parts (src/brand/logo.js) into particle targets. Each
+ * part's `order` becomes the particle's glyph index, so a reveal can form the
+ * logo part by part. `tagline` (optional) adds a line of text with its own
+ * order. Same return shape as sampleText.
  */
 export function sampleLogo({ parts, tagline, viewBox, width = 4, step = 3, maxPoints = 6000, seed = 3 }) {
   const k = LOGO_PX_PER_UNIT
@@ -109,7 +175,9 @@ export function sampleLogo({ parts, tagline, viewBox, width = 4, step = 3, maxPo
   canvas.width = Math.ceil(viewBox.width * k)
   canvas.height = Math.ceil(viewBox.height * k)
   const ctx = canvas.getContext('2d', { willReadFrequently: true })
-  const orders = [...new Set([...parts.map((p) => p.order), tagline.order])].sort((a, b) => a - b)
+  const orders = [...new Set([...parts.map((p) => p.order), ...(tagline ? [tagline.order] : [])])].sort(
+    (a, b) => a - b,
+  )
 
   const found = []
   for (const order of orders) {
@@ -118,7 +186,7 @@ export function sampleLogo({ parts, tagline, viewBox, width = 4, step = 3, maxPo
     ctx.setTransform(k, 0, 0, k, -viewBox.x * k, -viewBox.y * k)
     ctx.fillStyle = '#fff'
     parts.filter((p) => p.order === order).forEach((p) => ctx.fill(new Path2D(p.d), 'evenodd'))
-    if (tagline.order === order) {
+    if (tagline && tagline.order === order) {
       ctx.font = `${tagline.size}px Georgia, 'Times New Roman', serif`
       ctx.textAlign = 'center'
       if ('letterSpacing' in ctx) ctx.letterSpacing = `${tagline.letterSpacing}px`

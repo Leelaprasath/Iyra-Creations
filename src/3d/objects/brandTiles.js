@@ -1,4 +1,4 @@
-import { LOGO_PARTS, LOGO_TAGLINE, LOGO_VIEWBOX } from '../../brand/logo'
+import { LOGO_MARK_PARTS, LOGO_PARTS, LOGO_VIEWBOX } from '../../brand/logo'
 import { BRAND } from '../materials/palette'
 import { createCanvasTexture } from '../utils/textures'
 
@@ -15,13 +15,8 @@ export function drawLogo(ctx, cx, cy, width, color, withTagline = true) {
   ctx.scale(k, k)
   ctx.translate(-LOGO_VIEWBOX.x, -LOGO_VIEWBOX.y)
   ctx.fillStyle = color
-  LOGO_PARTS.forEach((p) => ctx.fill(new Path2D(p.d), 'evenodd'))
-  if (withTagline) {
-    ctx.font = `${LOGO_TAGLINE.size}px Georgia, 'Times New Roman', serif`
-    ctx.textAlign = 'center'
-    if ('letterSpacing' in ctx) ctx.letterSpacing = `${LOGO_TAGLINE.letterSpacing}px`
-    ctx.fillText(LOGO_TAGLINE.text, LOGO_TAGLINE.x, LOGO_TAGLINE.y)
-  }
+  const parts = withTagline ? LOGO_PARTS : LOGO_MARK_PARTS
+  parts.forEach((p) => ctx.fill(new Path2D(p.d), 'evenodd'))
   ctx.restore()
 }
 

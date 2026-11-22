@@ -8,5 +8,5 @@ export const SITE = {
   contactEndpoint: env.VITE_CONTACT_ENDPOINT || '',
   /** Display format and the digits-only form used for tel: and WhatsApp links. */
   phone: { display: '+91 76958 21566', digits: '917695821566' },
-  whatsappMessage: "Hi IYRA Creations, I'd like to discuss a project.",
+  whatsappMessage: "Hi Iyra Creations, I'd like to discuss a project.",
 }

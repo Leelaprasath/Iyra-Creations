@@ -6,9 +6,10 @@ import { LOGO_PARTS } from '../../brand/logo'
 /** SVG units → world units. The logo frame becomes ~4.1 × 1.3 world units. */
 export const LOGO_SCALE = 0.01
 /** Visual centre of the frame in SVG units. */
-export const LOGO_CENTER = [255, 249]
+export const LOGO_CENTER = [255, 265]
 
-const LETTERS = ['I', 'Y', 'R', 'A']
+/** Letterforms (incl. the CREATIONS lettering); everything else is the frame. */
+const LETTERS = ['I', 'Y', 'R', 'A', 'tagline']
 
 // SVG is y-down. Mirroring Y alone would flip triangle winding (faces would
 // point away from the camera), so Z is mirrored too: extrusions grow into -z
@@ -52,10 +53,14 @@ export function createLogoGeometries() {
     bevelSegments: 2,
     curveSegments: 12,
   }
+  // CREATIONS has thin serif strokes: a heavy bevel would swell it, so it gets
+  // a shallower, finer extrusion than the letters and frame.
+  const taglineOpts = { ...extrudeOpts, depth: 8, bevelThickness: 1, bevelSize: 0.25, bevelSegments: 1 }
   const extruded = toWorld(
     mergeGeometries([
-      new THREE.ExtrudeGeometry(letterShapes, extrudeOpts),
+      new THREE.ExtrudeGeometry(shapesFor(['I', 'Y', 'R', 'A']), extrudeOpts),
       new THREE.ExtrudeGeometry(frameShapes, extrudeOpts),
+      new THREE.ExtrudeGeometry(shapesFor(['tagline']), taglineOpts),
     ]),
   )
   extruded.computeVertexNormals()
@@ -67,15 +72,18 @@ export function createLogoGeometries() {
 export function createConstructionLines() {
   const segs = []
   const line = (x1, y1, x2, y2) => segs.push(...logoPoint(x1, y1), 0, ...logoPoint(x2, y2), 0)
-  ;[185, 206, 246, 264, 305, 313].forEach((y) => line(28, y, 482, y))
-  ;[76, 102, 147, 173, 219, 245, 327, 426].forEach((x) => line(x, 168, x, 330))
+  // Measured from the traced artwork (src/brand/logo.js): frame top, cap
+  // height, mid-line, baseline, CREATIONS top, frame bottom.
+  ;[185, 207, 257, 307, 324, 346].forEach((y) => line(28, y, 482, y))
+  // Stems: I, Y, R, and the A's outer feet.
+  ;[100, 126, 169, 195, 223, 250, 327, 423].forEach((x) => line(x, 165, x, 360))
   // Y arms and A legs, extended past the letters.
-  line(92, 180, 175, 273)
-  line(228, 180, 145, 273)
-  line(318, 327, 372, 195)
-  line(436, 327, 381, 195)
+  line(111, 181, 188, 286)
+  line(231, 165, 188, 281)
+  line(293, 317, 365, 182)
+  line(367, 182, 434, 332)
   // R bowl circle
-  const [cx, cy, r] = [272, 236, 38]
+  const [cx, cy, r] = [289, 238, 31]
   for (let i = 0; i < 48; i++) {
     const a1 = (i / 48) * Math.PI * 2
     const a2 = ((i + 1) / 48) * Math.PI * 2
@@ -91,7 +99,7 @@ export function createGridPoints(cols = 23, rows = 9) {
   const pts = []
   for (let j = 0; j < rows; j++) {
     for (let i = 0; i < cols; i++) {
-      pts.push(...logoPoint(28 + (i / (cols - 1)) * 454, 168 + (j / (rows - 1)) * 162), 0)
+      pts.push(...logoPoint(28 + (i / (cols - 1)) * 454, 165 + (j / (rows - 1)) * 195), 0)
     }
   }
   const g = new THREE.BufferGeometry()

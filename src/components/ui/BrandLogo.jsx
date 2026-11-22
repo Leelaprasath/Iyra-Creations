@@ -1,6 +1,4 @@
-/** Natural size of public/brand/iyra-logo.png (white artwork, transparent background). */
-const WIDTH = 443
-const HEIGHT = 181
+import { LOGO_IMAGE } from '../../brand/logoImage'
 
 /**
  * The official IYRA Creations logo image. Decorative by default (the parent
@@ -9,8 +7,8 @@ const HEIGHT = 181
 export function BrandLogo({ height = 40, alt = '', className = '', ...rest }) {
   return (
     <img
-      src="/brand/iyra-logo.png"
-      width={Math.round((height * WIDTH) / HEIGHT)}
+      src={LOGO_IMAGE.src}
+      width={Math.round((height * LOGO_IMAGE.width) / LOGO_IMAGE.height)}
       height={height}
       alt={alt}
       className={className}

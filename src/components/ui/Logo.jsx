@@ -1,4 +1,4 @@
-import { LOGO_PARTS, LOGO_TAGLINE, LOGO_VIEWBOX } from '../../brand/logo'
+import { LOGO_PARTS, LOGO_VIEWBOX } from '../../brand/logo'
 
 const VIEWBOX = `${LOGO_VIEWBOX.x} ${LOGO_VIEWBOX.y} ${LOGO_VIEWBOX.width} ${LOGO_VIEWBOX.height}`
 
@@ -22,16 +22,6 @@ export function Logo({ className = '', height = 40, title }) {
       {LOGO_PARTS.map((p) => (
         <path key={p.id} d={p.d} fillRule="evenodd" />
       ))}
-      <text
-        x={LOGO_TAGLINE.x}
-        y={LOGO_TAGLINE.y}
-        textAnchor="middle"
-        fontFamily={LOGO_TAGLINE.fontFamily}
-        fontSize={LOGO_TAGLINE.size}
-        letterSpacing={LOGO_TAGLINE.letterSpacing}
-      >
-        {LOGO_TAGLINE.text}
-      </text>
     </svg>
   )
 }

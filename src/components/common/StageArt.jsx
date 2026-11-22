@@ -1,4 +1,4 @@
-import { LOGO_PARTS, LOGO_TAGLINE, LOGO_VIEWBOX } from '../../brand/logo'
+import { LOGO_MARK_PARTS, LOGO_PARTS, LOGO_VIEWBOX } from '../../brand/logo'
 import styles from './StageArt.module.css'
 
 /**
@@ -28,23 +28,9 @@ function LogoMark({ x, y, width, fill = 'none', stroke, tagline = true }) {
       stroke={stroke}
       strokeWidth={stroke ? 1.2 / k : 0}
     >
-      {LOGO_PARTS.map((p) => (
+      {(tagline ? LOGO_PARTS : LOGO_MARK_PARTS).map((p) => (
         <path key={p.id} d={p.d} fillRule="evenodd" />
       ))}
-      {tagline && (
-        <text
-          x={LOGO_TAGLINE.x}
-          y={LOGO_TAGLINE.y}
-          textAnchor="middle"
-          fontFamily={LOGO_TAGLINE.fontFamily}
-          fontSize={LOGO_TAGLINE.size}
-          letterSpacing={LOGO_TAGLINE.letterSpacing}
-          fill={fill === 'none' ? stroke : fill}
-          stroke="none"
-        >
-          {LOGO_TAGLINE.text}
-        </text>
-      )}
     </g>
   )
 }

@@ -4,7 +4,7 @@ import { TRANSITION, EASE } from '../../config/motion'
 import { scrollToTarget } from '../../runtime/smoothScroll'
 import { registerTransition } from '../../runtime/transition'
 import { useAppStore } from '../../store/useAppStore'
-import { Logo } from '../ui/Logo'
+import { BrandLogo } from '../ui/BrandLogo'
 import styles from './PageTransition.module.css'
 
 /**
@@ -51,7 +51,7 @@ export function PageTransition() {
       <div className={styles.panel}>
         <span className={styles.edge} />
         <span className={styles.mark}>
-          <Logo height={96} />
+          <BrandLogo height={96} />
         </span>
       </div>
     </div>

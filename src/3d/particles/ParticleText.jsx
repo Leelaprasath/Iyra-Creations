@@ -58,9 +58,13 @@ export function ParticleText({
 
   useEffect(() => {
     let cancelled = false
-    loadTextFont().then(() => {
-      if (!cancelled) setSample(sampler({ lines: JSON.parse(key ?? 'null'), width, step, maxPoints, seed }))
-    })
+    // Samplers may be sync or async (e.g. ones that load an image first).
+    loadTextFont()
+      .then(() => sampler({ lines: JSON.parse(key ?? 'null'), width, step, maxPoints, seed }))
+      .then((result) => {
+        if (!cancelled && result) setSample(result)
+      })
+      .catch((err) => console.warn('ParticleText: sampling failed', err))
     return () => {
       cancelled = true
     }

@@ -69,7 +69,7 @@ export function ContactForm() {
         <p className={styles.successTitle}>
           Thank you<span className="accent">.</span>
         </p>
-        <p className="lead">Your message has reached IYRA Creations. We will reply to {values.email.trim()}.</p>
+        <p className="lead">Your message has reached Iyra Creations. We will reply to {values.email.trim()}.</p>
         <button
           type="button"
           className={styles.reset}

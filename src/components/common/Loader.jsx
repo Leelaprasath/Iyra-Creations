@@ -4,7 +4,7 @@ import { DURATION, EASE, INTRO } from '../../config/motion'
 import { intro } from '../../runtime/intro'
 import { lockScroll } from '../../runtime/smoothScroll'
 import { useAppStore } from '../../store/useAppStore'
-import { Logo } from '../ui/Logo'
+import { BrandLogo } from '../ui/BrandLogo'
 import styles from './Loader.module.css'
 
 /** Weights of the real loading milestones. */
@@ -130,7 +130,7 @@ export function Loader() {
     <div ref={root} className={styles.loader} data-phase={phase}>
       <div className={styles.backdrop} />
       <div className={styles.brand} role="status" aria-live="polite">
-        <Logo className={styles.word} height={64} />
+        <BrandLogo className={styles.word} height={64} fetchPriority="high" />
         <div className={styles.meter}>
           <span ref={barRef} className={styles.bar} />
         </div>
