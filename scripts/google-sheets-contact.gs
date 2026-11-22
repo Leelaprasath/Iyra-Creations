@@ -17,6 +17,7 @@ function doPost(e) {
   try {
     const data = JSON.parse((e && e.postData && e.postData.contents) || '{}')
     if (data.secret !== SECRET) return json({ ok: false, error: 'Unauthorized' })
+    if (data.action === 'list') return json({ ok: true, rows: listRows() })
 
     const lock = LockService.getScriptLock()
     lock.waitLock(10000)
@@ -53,6 +54,28 @@ function getSheet() {
     sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight('bold')
   }
   return sheet
+}
+
+// Used by the website's admin panel (/admin) to read enquiries.
+function listRows() {
+  const sheet = getSheet()
+  const last = sheet.getLastRow()
+  if (last < 2) return []
+  const keys = ['submittedAt', 'name', 'email', 'phone', 'company', 'service', 'budget', 'message', 'page', 'userAgent']
+  return sheet
+    .getRange(2, 1, last - 1, keys.length)
+    .getValues()
+    .map(function (values, i) {
+      const row = { row: i + 2 }
+      keys.forEach(function (key, k) {
+        const v = values[k]
+        row[key] = v instanceof Date ? v.toISOString() : String(v == null ? '' : v)
+      })
+      return row
+    })
+    .filter(function (row) {
+      return row.name || row.email || row.message
+    })
 }
 
 // Stop values like "=HYPERLINK(...)" being run as formulas in the sheet.

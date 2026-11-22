@@ -39,6 +39,15 @@ Submissions go browser → `api/contact.js` (Vercel function) → Google Apps Sc
    - `GOOGLE_SHEETS_SECRET` = the same secret as in the script
 4. Redeploy. The first submission creates an `Enquiries` tab with headers.
 
+### Admin panel (`/admin`)
+
+`/admin` shows every enquiry from the Sheet (search, service filter, CSV export). It is a standalone page — no 3D scene — and is excluded from search engines. Sign-in is checked server-side (`api/admin/*`) and sets an 8-hour HttpOnly session cookie. Set in Vercel:
+
+- `ADMIN_EMAIL` / `ADMIN_PASSWORD` — the admin login
+- `ADMIN_SESSION_SECRET` — a long random string (changing it signs everyone out)
+
+The panel reads rows through the same Apps Script (`action: "list"`), so the deployed script must include `listRows`.
+
 If you edit the Apps Script later, use **Deploy → Manage deployments → Edit → New version** so the same URL picks up the change. `vite dev` doesn't run `/api`; use `vercel dev` to test locally.
 
 ## Deployment

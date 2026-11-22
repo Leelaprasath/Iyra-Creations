@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect } from 'react'
-import { Route, Routes } from 'react-router'
+import { Route, Routes, useLocation } from 'react-router'
 import { Cursor } from './components/common/Cursor'
 import { ErrorBoundary } from './components/common/ErrorBoundary'
 import { FallbackBackdrop } from './components/common/FallbackBackdrop'
@@ -16,6 +16,7 @@ import { useAppStore } from './store/useAppStore'
 const Experience = lazy(() => import('./3d/core/Experience'))
 const ProjectPage = lazy(() => import('./pages/ProjectPage'))
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'))
+const AdminPage = lazy(() => import('./pages/AdminPage'))
 
 const FONT_TIMEOUT_MS = 3000
 
@@ -38,16 +39,26 @@ export default function App() {
   const tier = useAppStore((s) => s.tier)
   const reducedMotion = useAppStore((s) => s.reducedMotion)
   const setWebglFailed = useAppStore((s) => s.setWebglFailed)
+  const isAdmin = useLocation().pathname.startsWith('/admin')
 
   useEnvironmentSync()
   useAnchorNavigation()
   useFontReadiness()
 
-  useEffect(() => startSmoothScroll({ smooth: !reducedMotion }), [reducedMotion])
+  useEffect(() => (isAdmin ? undefined : startSmoothScroll({ smooth: !reducedMotion })), [reducedMotion, isAdmin])
 
   useEffect(() => {
     document.documentElement.dataset.tier = tier
   }, [tier])
+
+  // The admin panel is a plain utility page: no 3D scene, loader, header or custom cursor.
+  if (isAdmin) {
+    return (
+      <Suspense fallback={null}>
+        <AdminPage />
+      </Suspense>
+    )
+  }
 
   return (
     <>
