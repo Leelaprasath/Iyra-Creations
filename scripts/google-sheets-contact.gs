@@ -69,7 +69,8 @@ function listRows() {
       const row = { row: i + 2 }
       keys.forEach(function (key, k) {
         const v = values[k]
-        row[key] = v instanceof Date ? v.toISOString() : String(v == null ? '' : v)
+        // instanceof Date is unreliable for Sheet values in Apps Script; duck-type instead.
+        row[key] = v && typeof v.toISOString === 'function' ? v.toISOString() : String(v == null ? '' : v)
       })
       return row
     })

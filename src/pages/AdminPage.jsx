@@ -16,6 +16,8 @@ const formatDate = (iso) => {
   return Number.isNaN(d.getTime()) ? iso : DATE_FMT.format(d)
 }
 const DAY_MS = 24 * 60 * 60 * 1000
+/** Milliseconds for a stored date (ISO or Apps Script's long date string); 0 when unparseable. */
+const toTime = (value) => new Date(value).getTime() || 0
 
 function useNoIndex() {
   useEffect(() => {
@@ -167,7 +169,7 @@ function Dashboard({ email, rows, loadedAt, loading, error, onRefresh, onSignOut
   const [query, setQuery] = useState('')
   const [service, setService] = useState('')
 
-  const sorted = useMemo(() => [...rows].sort((a, b) => String(b.submittedAt).localeCompare(String(a.submittedAt))), [rows])
+  const sorted = useMemo(() => [...rows].sort((a, b) => toTime(b.submittedAt) - toTime(a.submittedAt)), [rows])
   const services = useMemo(() => [...new Set(rows.map((r) => r.service).filter(Boolean))].sort(), [rows])
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
@@ -178,7 +180,7 @@ function Dashboard({ email, rows, loadedAt, loading, error, onRefresh, onSignOut
     )
   }, [sorted, query, service])
 
-  const lastWeek = rows.filter((r) => loadedAt - new Date(r.submittedAt).getTime() < 7 * DAY_MS).length
+  const lastWeek = rows.filter((r) => loadedAt - toTime(r.submittedAt) < 7 * DAY_MS).length
 
   return (
     <div className={styles.dash}>

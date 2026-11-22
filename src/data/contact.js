@@ -1,12 +1,13 @@
 /**
- * Contact form options. Budget ranges are indicative — adjust the currency and
- * bands to match IYRA's pricing before launch.
+ * Contact form options. Budget bands are in Indian Rupees (Indian digit
+ * grouping) — adjust the ranges to match IYRA's pricing.
  */
 export const budgetOptions = [
   'Not sure yet',
-  'Under $2,000',
-  '$2,000 – $5,000',
-  '$5,000 – $15,000',
-  '$15,000 – $40,000',
-  '$40,000+',
+  'Under ₹25,000',
+  '₹25,000 – ₹50,000',
+  '₹50,000 – ₹1,00,000',
+  '₹1,00,000 – ₹2,50,000',
+  '₹2,50,000 – ₹5,00,000',
+  '₹5,00,000+',
 ]
