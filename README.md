@@ -27,6 +27,20 @@ npm run brand     # regenerate public/brand/*.svg and public/favicon.svg from sr
 
 The contact integration lives in `src/services/contactAdapter.js`: swap the `fetch` for any provider there.
 
+### Contact form → Google Sheets
+
+Submissions go browser → `api/contact.js` (Vercel function) → Google Apps Script → a row in your Sheet. The Sheet URL and secret stay server-side.
+
+1. Create a Google Sheet. Open **Extensions → Apps Script**, replace the code with `scripts/google-sheets-contact.gs`, and change `SECRET` to a long random string.
+2. **Deploy → New deployment → Web app**, _Execute as: Me_, _Who has access: Anyone_. Authorise it and copy the `/exec` URL.
+3. In Vercel → _Settings → Environment Variables_ set:
+   - `VITE_CONTACT_ENDPOINT` = `/api/contact`
+   - `GOOGLE_SHEETS_WEBHOOK_URL` = the `/exec` URL
+   - `GOOGLE_SHEETS_SECRET` = the same secret as in the script
+4. Redeploy. The first submission creates an `Enquiries` tab with headers.
+
+If you edit the Apps Script later, use **Deploy → Manage deployments → Edit → New version** so the same URL picks up the change. `vite dev` doesn't run `/api`; use `vercel dev` to test locally.
+
 ## Deployment
 
 It is a single-page app with client routes (`/work/:slug`), so the host must serve `index.html` for unknown paths.

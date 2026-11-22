@@ -53,7 +53,8 @@ export function ContactForm() {
 
     setStatus('submitting')
     try {
-      await submitContact(toPayload(values))
+      const website = formRef.current.elements.website?.value || ''
+      await submitContact({ ...toPayload(values), website })
       setStatus('success')
       track('contact_submitted', { service: values.service })
     } catch (err) {
@@ -94,6 +95,17 @@ export function ContactForm() {
         Fields marked <span aria-hidden="true">*</span>
         <span className="visually-hidden">with an asterisk</span> are required.
       </p>
+
+      {/* Honeypot: hidden from people and assistive tech; bots that fill it are dropped server-side. */}
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        defaultValue=""
+        style={{ position: 'absolute', left: '-10000px', width: 1, height: 1, opacity: 0 }}
+      />
 
       <div className={styles.row}>
         <Field
