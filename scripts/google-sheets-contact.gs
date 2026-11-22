@@ -8,7 +8,7 @@
  * secret as GOOGLE_SHEETS_SECRET.
  */
 
-const SECRET = 'snslfsrfurwfiiIJUHubuib8U9uubbJKNIHEUFEFJO7F'
+const SECRET = 'CHANGE-ME-to-a-long-random-string'
 const SHEET_ID = '177jvsD1YBRtbXj7xlaGQU5SReRAwr1x_X08JD_MeeiM'
 const SHEET_NAME = 'Enquiries'
 const HEADERS = ['Submitted at', 'Name', 'Email', 'Phone', 'Company', 'Service', 'Budget', 'Message', 'Page', 'User agent']
