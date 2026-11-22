@@ -5,7 +5,7 @@ import { navigation } from '../../data/navigation'
 import { DURATION, EASE, STAGGER } from '../../config/motion'
 import { useAppStore } from '../../store/useAppStore'
 import { track } from '../../utils/analytics'
-import { Logo } from '../ui/Logo'
+import { BrandLogo } from '../ui/BrandLogo'
 import { TransitionLink } from '../common/TransitionLink'
 import { MobileMenu } from './MobileMenu'
 import styles from './Header.module.css'
@@ -46,7 +46,7 @@ export function Header() {
           data-header-item
           data-cursor="link"
         >
-          <Logo height={40} />
+          <BrandLogo height={40} fetchPriority="high" />
         </TransitionLink>
 
         <nav aria-label="Primary" className={styles.nav}>

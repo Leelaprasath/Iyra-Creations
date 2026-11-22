@@ -23,7 +23,7 @@ npm run brand     # regenerate public/brand/*.svg and public/favicon.svg from sr
 | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | `VITE_SITE_URL`         | Production URL. Enables canonical link, `og:url`, absolute OG image, `sitemap.xml` and a sitemap-aware `robots.txt` at build time. |
 | `VITE_CONTACT_ENDPOINT` | Endpoint that accepts the contact form as a JSON `POST`. **Until set, the form does not send and says so** (no fake success).      |
-| `VITE_CONTACT_EMAIL`    | Public address for "Say hello", the footer and the mailto fallback. Hidden everywhere when empty.                                  |
+| `VITE_CONTACT_EMAIL`    | Overrides the public address (default `iyracreationss@gmail.com`, set with phone/WhatsApp in `src/config/site.js`).               |
 
 The contact integration lives in `src/services/contactAdapter.js`: swap the `fetch` for any provider there.
 

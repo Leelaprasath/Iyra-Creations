@@ -32,9 +32,23 @@
   color: var(--c-orange);
 }
 
+.col a.contact {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 2.25rem;
+  overflow-wrap: anywhere;
+}
+
+.icon {
+  flex: none;
+  color: var(--c-orange);
+}
+
 .wordmark {
   display: block;
-  width: min(100%, 44rem);
+  /* Capped near the PNG's natural width (443px) so it stays crisp. */
+  width: min(100%, 28rem);
   height: auto;
   margin: clamp(3rem, 8vh, 5rem) 0 2rem;
   color: var(--c-white);
